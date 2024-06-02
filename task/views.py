@@ -7,23 +7,23 @@ from django.http import HttpResponse
 
 def home(request):
     return render(request, 'home.html',)
+
+
 def signup(request):
     if request.method == 'GET':
-       return render(request, 'signup.html')
+        return render(request, 'signup.html')
     else:
-           if request.POST['password1'] == request.POST['password2']:   
+        if request.POST['password1'] == request.POST['password2']:
             try:
-                #register user
+                # register user
                 user = User.objects.create_user(username=request.POST['username'],
-                password=request.POST['password1'])
+                                                password=request.POST['password1'])
                 user.save()
                 return HttpResponse('User created successfully')
             except:
-                return HttpResponse('User already exists')
-
-      
-    return HttpResponse('password do not match')
- 
-
-
- 
+                return render(request, 'signup.html', {
+                    "error": 'username already exits'
+                })
+    return render(request, 'signup.html', {
+        "error": 'password do not match'
+    })
