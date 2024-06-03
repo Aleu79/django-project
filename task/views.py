@@ -7,9 +7,7 @@ from django.db import IntegrityError
 # Create your views here.
 
 def home(request):
-    return render(request, 'home.html',{
-        
-    })
+    return render(request, 'home.html',)
 
 
 def signup(request):
@@ -38,3 +36,6 @@ def tasks(request):
 def signout(request):
     logout(request)
     return redirect('home')
+
+def signip(request):
+    return render(request,'signip.html')
