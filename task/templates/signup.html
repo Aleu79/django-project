@@ -1,25 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>signup</h1>
-    {{error}}    
-    <form method="post">
-        {% csrf_token %}
-        <label for="id_username">User: </label>
-        <input type="text" name="username">
-        <label for="id_password"></label>
-        <input type="password" name="password1" id="">
-        <input type="password" name="password2" id="">
-        <button>
-            Signup
-        </button>
-    </form>
- 
-    
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>signup</h1>
+{{error}}    
+<form method="post">
+    {% csrf_token %}
+    <label for="id_username">User: </label>
+    <input type="text" name="username">
+    <label for="id_password"></label>
+    <input type="password" name="password1" id="">
+    <input type="password" name="password2" id="">
+    <button>
+        Signup
+    </button>
+</form>
+
+
+{% endblock %}
