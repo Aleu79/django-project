@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Django</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stylesa.css' %}">
 
 </head>
 <body>
@@ -18,7 +18,7 @@
                 {% if user.is_authenticated %}
                 <li><a href="/logout">Logout</a></li>
                 {% else %}
-                <li><a href="/signip">Login</a></li>
+                <li><a href="/signin">Signin</a></li>
                 <li><a href="/signup">Signup</a></li>
                 {% endif %}
             </ul>

@@ -1,0 +1,57 @@
+commit 520be38b4c2f20dc5370878c380cc9b50dbe4cf6
+Author: Aleu79 <aleeaguero79@gmail.com>
+Date:   Mon Jun 3 15:02:16 2024 -0300
+
+    8th commit
+
+commit 4a18ac9d79d27bc4ad2942a1cd49d742909eaa0e
+Author: Aleu79 <aleeaguero79@gmail.com>
+Date:   Mon Jun 3 12:32:00 2024 -0300
+
+    seventh commit:logout
+
+commit c8b3188dfd5f7dbe89a1130736ac5402a56eae9c
+Author: Aleu79 <aleeaguero79@gmail.com>
+Date:   Mon Jun 3 00:37:13 2024 -0300
+
+    sixth commit:logout
+
+commit 521a6b9dbe1e3c76e1164478cb72651c520036fd
+Author: Aleu79 <aleeaguero79@gmail.com>
+Date:   Sun Jun 2 22:59:35 2024 -0300
+
+    fifth commit
+
+commit 57f58c09b4e9ba7253b07d758fab8083326b957e
+Author: Aleu79 <aleeaguero79@gmail.com>
+Date:   Sun Jun 2 20:54:18 2024 -0300
+
+    fourth commit: error handling
+
+commit 4be1d73bf834ae67e167e0671c79623a6b67223b
+Author: Aleu79 <aleeaguero79@gmail.com>
+Date:   Sun Jun 2 16:21:16 2024 -0300
+
+    third commmit:registration
+
+commit 7bb8ff0816764898fa840d648c3a637c63ee20c1
+Author: Aleu79 <aleeaguero79@gmail.com>
+Date:   Sat Jun 1 15:48:21 2024 -0300
+
+    second commit:test
+
+commit b66cac15e03b3a8456b950ba143d5c05fc86f2ea
+Author: Aleu79 <133813252+Aleu79@users.noreply.github.com>
+Date:   Fri May 31 02:58:25 2024 -0300
+
+    README.md
+    
+    You can clone the repository and make a new branch in case you want to practice with me.
+    git clone https://github.com/Aleu79/django-project
+    git branch <branch name>
+
+commit f0564a2d07810d5b5a916e7ca44b2f48d9316c4c
+Author: Aleu79 <aleeaguero79@gmail.com>
+Date:   Fri May 31 02:34:02 2024 -0300
+
+    first commit

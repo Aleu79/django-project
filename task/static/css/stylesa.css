@@ -7,10 +7,29 @@ body{
     background-color: #F7F9F9;
 }
 .content_list{
-    display: flex;
     list-style-type: none;
-    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: fixed;
+    background-color: #333;
 }
+li{
+    float: right;
+}
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+
+}
+li:hover{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+ /* de aca para arriba tenemos el css para el header */
 .content_form{
     display: flex;
     flex-direction: column;
