@@ -1,5 +1,5 @@
 from django import forms
-from .models import Task
+from .models import *
 from django.forms import DateTimeInput
 
 class formTask(forms.ModelForm):
@@ -15,3 +15,14 @@ class formTask(forms.ModelForm):
     date_completed = forms.DateTimeField(
         widget=DateTimeInput(attrs={'type': 'date'})
     )
+
+class formTaskComment(forms.ModelForm):
+    class Meta:
+        model = TaskComment
+        fields = ['comment']  
+
+    def clean_comment(self):
+        comment = self.cleaned_data.get('comment')
+        if not comment:
+            raise forms.ValidationError("El comentario no puede estar vacío.")
+        return comment

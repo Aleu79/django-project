@@ -39,6 +39,37 @@
         </p>
     </div>
     
+    {% if user == task.user %}
+    <a href="{% url 'edit_task' task.id %}" class="btn-edit">Editar tarea</a>
+    <a href="{% url 'delete_task' task.id %}" class="btn-delete" onclick="return confirm('¿Estás seguro de que deseas eliminar esta tarea?')">Eliminar tarea</a>
+    {% endif %}
+
     <a href="{% url 'tasks' %}" class="back-linkdetails">Volver Atras</a>
 </div>
+
+<div class="comments-section">
+    <h3>Comentarios</h3>
+
+    <form method="POST" class="comment-form">
+        {% csrf_token %}
+        {{ form.as_p }}  
+        <button type="submit" class="btn-submit">Comentar</button>
+    </form>
+
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <ul class="comments-list">
+        {% for comment in comments %}
+        <li class="comment-item">
+            <p><strong>{{ comment.user.username }}</strong> <span class="comment-time">({{ comment.created|date:"Y-m-d H:i" }})</span></p>
+            <p>{{ comment.comment }}</p>
+        </li>
+        {% empty %}
+        <p>No hay comentarios aún.</p>
+        {% endfor %}
+    </ul>
+</div>
+
 {% endblock %}

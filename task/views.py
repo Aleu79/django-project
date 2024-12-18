@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
-from .formulario import formTask
+from .formulario import *
 from .models import *
 from django.contrib.auth.decorators import login_required
 
@@ -40,6 +40,61 @@ def tasks(request):
         'tareas_compartidas': tareas_compartidas
     })
 
+@login_required
+def task_comment(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+
+    if request.method == 'POST':
+        form = formTaskComment(request.POST)
+        if form.is_valid():
+            task_comment = form.save(commit=False)
+            task_comment.task = task
+            task_comment.user = request.user
+            task_comment.save()
+
+            return redirect('task_details', task_id=task.id)
+        else:
+            return render(request, 'task_details.html', {
+                'task': task,
+                'form': form,
+                'error': 'El comentario no es válido.'
+            })
+
+    else:
+        form = formTaskComment()
+
+    return render(request, 'task_details.html', {'task': task, 'form': form})
+
+
+@login_required
+def edit_task(request, task_id):
+    task = get_object_or_404(Task, pk=task_id, user=request.user)
+
+    if request.method == 'POST':
+        form = formTask(request.POST, instance=task)  
+        if form.is_valid():
+            form.save()  
+            if task.is_personal:
+                return redirect('tasks')  
+            else:
+                return redirect('tareatodos')  
+        else:
+            return render(request, 'edit_task.html', {
+                'form': form,
+                'error': 'Por favor, corrige los errores.'
+            })
+    else:
+        form = formTask(instance=task)  
+    return render(request, 'edit_task.html', {'form': form})
+
+@login_required
+def delete_task(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)    
+    if request.user == task.user:
+        task.delete()  
+        return redirect('tasks')  
+    else:
+        return redirect('tasks')
 
 def tareatodos(request):
     tareas = Task.objects.filter(is_personal=False)
@@ -47,7 +102,27 @@ def tareatodos(request):
 
 def task_details(request, task_id):
     task = get_object_or_404(Task, pk=task_id)
-    return render(request, 'task_details.html', {'task': task})
+    
+    if request.method == 'POST':
+        form = formTaskComment(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.task = task
+            comment.user = request.user
+            comment.save()  
+
+            return redirect('task_details', task_id=task.id)  
+
+    else:
+        form = formTaskComment()
+
+    comments = task.comments.all()
+
+    return render(request, 'task_details.html', {
+        'task': task,
+        'form': form,
+        'comments': comments
+    })
 
 
 @login_required
