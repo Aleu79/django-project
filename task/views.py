@@ -5,9 +5,49 @@ from django.db import IntegrityError
 from .formulario import *
 from .models import *
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.core.exceptions import ValidationError
+
 
 def home(request):
-    return render(request, 'home.html')
+    if not request.user.is_authenticated:
+        return redirect('signin')  
+
+    unread_notifications = TaskNotification.objects.filter(user=request.user, read=False).count()
+    return render(request, 'home.html', {
+        'unread_notifications': unread_notifications
+    })
+
+def create_task_notification(task, user, message):
+    notification = TaskNotification(
+        task=task,
+        user=user,
+        message=message
+    )
+    notification.save()
+
+
+@login_required(login_url='signup')
+def notifications(request):
+    notifications = TaskNotification.objects.filter(user=request.user)
+
+    unread_count = notifications.filter(read=False).count()
+
+    notifications.filter(read=False).update(read=True)
+
+    return render(request, 'notifications.html', {
+        'notifications': notifications,
+        'unread_count': unread_count
+    })
+
+
+@login_required(login_url='signup')
+def mark_as_read(request, notification_id):
+    notification = get_object_or_404(TaskNotification, pk=notification_id, user=request.user)
+    notification.read = True
+    notification.save()
+    return redirect('notifications')
+
 
 def perfil(request):
     if request.user.is_authenticated:
@@ -31,10 +71,17 @@ def signup(request):
     else:
         if request.POST['password1'] == request.POST['password2']:
             try:
+                email = request.POST['gmail']
+
+                if not email or '@' not in email:
+                    raise ValidationError("Por favor ingresa un correo válido.")
+
                 user = User.objects.create_user(
                     username=request.POST['username'],
-                    password=request.POST['password1']
+                    password=request.POST['password1'],
+                    email=email
                 )
+                print(f"Usuario creado: {user.username}, Gmail: {user.email}")
                 user.save()
                 login(request, user)
                 return redirect('tasks')
@@ -42,9 +89,14 @@ def signup(request):
                 return render(request, 'signup.html', {
                     "error": 'El nombre de usuario ya existe.'
                 })
-    return render(request, 'signup.html', {
-        "error": 'Las contraseñas no coinciden.'
-    })
+            except ValidationError as ve:
+                return render(request, 'signup.html', {
+                    "error": str(ve)
+                })
+        return render(request, 'signup.html', {
+            "error": 'Las contraseñas no coinciden.'
+        })
+
 
 @login_required(login_url='signup')
 def tasks(request):
@@ -62,7 +114,6 @@ def tasks(request):
 @login_required(login_url='signup')
 def task_details(request, task_id):
     task = get_object_or_404(Task, pk=task_id)
-    
     task_history = task.taskhistory_set.all()
 
     if request.method == 'POST':
@@ -74,6 +125,14 @@ def task_details(request, task_id):
             comment.save()
 
             add_task_history(task, request.user, "Comentario Agregado")
+            
+            # Crear notificación solo si el comentario no es del propietario de la tarea
+            if request.user != task.user:
+                create_task_notification(
+                    task,
+                    task.user,
+                    f"Nuevo comentario en tu tarea '{task.title}' por {request.user.username}: {comment.comment[:50]}..."
+                )
 
             return redirect('task_details', task_id=task.id)
 
@@ -88,7 +147,6 @@ def task_details(request, task_id):
         'comments': comments,
         'task_history': task_history  
     })
-
 
 def add_task_history(task, user, action):
     """

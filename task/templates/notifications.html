@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <style>
+    /* Contenedor principal */
+    .containernoti {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Título */
+    .notih1 {
+      font-size: 1.8rem;
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Lista de notificaciones */
+    .notiul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li.notification {
+      padding: 15px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    li.notification.read {
+      background-color: #e6f7e6;
+    }
+
+    li.notification:hover {
+      background-color: #f0f0f0;
+    }
+
+    /* Texto de las notificaciones */
+    p {
+      margin: 0;
+      color: #555;
+      font-size: 1rem;
+    }
+
+    .time {
+      font-size: 0.9rem;
+      color: #999;
+    }
+
+    /* Botón de marcar como leído */
+    .mark-read-btn {
+      align-self: flex-start;
+      background-color: #007bff;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .mark-read-btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* Mensaje cuando no hay notificaciones */
+    p {
+      text-align: center;
+    }
+
+    /* Responsividad */
+    @media (max-width: 600px) {
+      .containernoti {
+        padding: 15px;
+      }
+
+      .notih1 {
+        font-size: 1.5rem;
+      }
+
+      li.notification {
+        padding: 10px;
+      }
+
+      .mark-read-btn {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+      }
+    }
+  </style>
+
+  <section>
+    <div class="containernoti">
+      <h1 class="notih1">Notificaciones</h1>
+      {% if notifications %}
+        <ul class="notiul">
+          {% for notification in notifications %}
+            <li class="notification{% if notification.read %} read{% endif %}">
+              <p>{{ notification.message }}</p>
+              <p class="time">{{ notification.created }}</p>
+              {% if not notification.read %}
+                <a href="{% url 'mark_as_read' notification.id %}" class="mark-read-btn">Marcar como leído</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No tienes notificaciones.</p>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}

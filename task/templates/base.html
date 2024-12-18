@@ -19,6 +19,12 @@
                 {% if user.is_authenticated %}
                 <li><a href="/tasks/new">Nueva Tarea</a></li>
                 <li><a href="/tasks">Tareas Personales</a></li>
+                <li><a href="{% url 'notifications' %}">
+                    Notificaciones
+                    {% if unread_notifications %}
+                        <span class="badge">{{ unread_notifications }}</span>
+                    {% endif %}
+                </a></li>
                 <li><a href="/logout">Logout</a></li>
                 {% else %}
                 <li><a href="/signin">Login</a></li>
@@ -31,7 +37,5 @@
         {% block content %}
         {% endblock %}
     </section>
-    
-
 </body>
 </html>

@@ -1,22 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>signup</h1>
-{{error}}    
+<h1>Signup</h1>
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
 <form method="POST">
     {% csrf_token %}
-    <label for="id_username">User: </label>
-    <input type="text" name="username">
+    <label for="id_username">Usuario: </label>
+    <input type="text" name="username" required>
     <br>
-    <label for="id_password">Password:</label>
-    <input type="password" name="password1" id="">
-    <br>    
-    <label for="id_password2">Repite Password</label>
-    <input type="password" name="password2" id="">
-    <button>
-        Signup
-    </button>
+    <label for="id_gmail">Correo: </label>
+    <input type="email" name="gmail" required>
+    <br>
+    <label for="id_password">Contraseña:</label>
+    <input type="password" name="password1" required>
+    <br>
+    <label for="id_password2">Repite Contraseña:</label>
+    <input type="password" name="password2" required>
+    <br>
+    <button type="submit">Registrarse</button>
 </form>
-
 
 {% endblock %}
