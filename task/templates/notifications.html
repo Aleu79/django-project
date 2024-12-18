@@ -2,85 +2,124 @@
 
 {% block content %}
   <style>
-    /* Contenedor principal */
+    @import url("https://fonts.googleapis.com/css?family=Lato:400i,600");
+
+    bodynoti {
+      margin: 0;
+      padding: 20vmin 20vmin 20vmin 30vmin;
+      text-align: center;
+      font-family: 'Lato', sans-serif;
+      color: rgba(0, 0, 0, 0.6);
+      font-weight: 400;
+      font-style: italic;
+      -webkit-font-smoothing: antialiased;
+      background-color: #f7f7f7;
+    }
+
     .containernoti {
       max-width: 800px;
-      margin: 20px auto;
+      margin: auto;
       padding: 20px;
-      background-color: #f9f9f9;
+      text-align: left;
+      background: rgba(255, 255, 255, 0.9);
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      animation: popFromBottom 0.5s ease-in-out;
     }
 
-    /* Título */
+    @keyframes popFromBottom {
+      0% {
+        transform: translateY(300px) scale(0.9);
+      }
+      100% {
+        transform: translateY(0) scale(1);
+      }
+    }
+
     .notih1 {
-      font-size: 1.8rem;
-      color: #333;
+      font-size: 2rem;
+      color: rgba(0, 0, 0, 0.8);
       text-align: center;
       margin-bottom: 20px;
+      font-style: normal;
     }
 
-    /* Lista de notificaciones */
     .notiul {
-      list-style-type: none;
+      list-style: none;
       padding: 0;
       margin: 0;
     }
 
     li.notification {
-      padding: 15px;
-      margin-bottom: 10px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      background-color: #fff;
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: background-color 0.3s ease;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 20px;
+      background: #ffe271;
+      border-radius: 0 50px 50px 0;
+      font-size: 1rem;
+      color: #333;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
     }
 
     li.notification.read {
-      background-color: #e6f7e6;
+      background: #e6f7e6;
     }
 
-    li.notification:hover {
-      background-color: #f0f0f0;
+    .profile-noti {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 20px;
+      flex-shrink: 0;
+      border: 3px solid #fff;
     }
 
-    /* Texto de las notificaciones */
-    p {
-      margin: 0;
-      color: #555;
+    .profile-noti img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .message-noti {
+      flex-grow: 1;
       font-size: 1rem;
     }
 
-    .time {
-      font-size: 0.9rem;
-      color: #999;
+    .time-noti {
+      display: block;
+      font-size: 0.8rem;
+      color: rgba(0, 0, 0, 0.6);
+      margin-top: 5px;
     }
 
-    /* Botón de marcar como leído */
-    .mark-read-btn {
-      align-self: flex-start;
-      background-color: #007bff;
+    .mark-read-btn-noti {
+      background: #007bff;
       color: #fff;
       text-decoration: none;
+      padding: 10px 15px;
       font-size: 0.9rem;
-      padding: 8px 12px;
-      border-radius: 5px;
+      border-radius: 20px;
       transition: background-color 0.3s ease;
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
-    .mark-read-btn:hover {
+    .mark-read-btn-noti:hover {
       background-color: #0056b3;
     }
 
-    /* Mensaje cuando no hay notificaciones */
-    p {
+    .no-notifications-noti {
       text-align: center;
+      font-size: 1rem;
+      color: rgba(0, 0, 0, 0.6);
     }
 
-    /* Responsividad */
     @media (max-width: 600px) {
       .containernoti {
         padding: 15px;
@@ -91,12 +130,15 @@
       }
 
       li.notification {
-        padding: 10px;
+        flex-direction: column;
+        padding: 15px;
       }
 
-      .mark-read-btn {
-        font-size: 0.8rem;
-        padding: 6px 10px;
+      .mark-read-btn-noti {
+        position: static;
+        transform: none;
+        margin-top: 10px;
+        text-align: center;
       }
     }
   </style>
@@ -108,16 +150,21 @@
         <ul class="notiul">
           {% for notification in notifications %}
             <li class="notification{% if notification.read %} read{% endif %}">
-              <p>{{ notification.message }}</p>
-              <p class="time">{{ notification.created }}</p>
+              <div class="profile-noti">
+                <img src="https://via.placeholder.com/50" alt="Profile">
+              </div>
+              <div class="message-noti">
+                <p>{{ notification.message }}</p>
+                <span class="time-noti">{{ notification.created }}</span>
+              </div>
               {% if not notification.read %}
-                <a href="{% url 'mark_as_read' notification.id %}" class="mark-read-btn">Marcar como leído</a>
+                <a href="{% url 'mark_as_read' notification.id %}" class="mark-read-btn-noti">Marcar como leído</a>
               {% endif %}
             </li>
           {% endfor %}
         </ul>
       {% else %}
-        <p>No tienes notificaciones.</p>
+        <p class="no-notifications-noti">No tienes notificaciones.</p>
       {% endif %}
     </div>
   </section>

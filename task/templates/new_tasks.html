@@ -1,24 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <h1 class="title">Crear Nueva Tarea</h1>
+<div class="container_new">
+    <h1 class="title_new">Crear Nueva Tarea</h1>
 
-    <form method="POST" class="form">
+    <form method="POST" class="form_new">
         {% csrf_token %}
-        <div class="form-fields">
+        <div class="form-fields_new">
             {{ form.as_p }}  
         </div>
         {% if error %}
-            <p class="error">{{ error }}</p>
+            <p class="error_new">{{ error }}</p>
         {% endif %}
-        <button type="submit" class="submit-button">Guardar Tarea</button>
+        <button type="submit" class="submit-button_new">Guardar Tarea</button>
     </form>
 </div>
 
 <style>
     /* Contenedor principal */
-    .container {
+    .container_new {
         max-width: 600px;
         margin: 50px auto;
         padding: 20px;
@@ -29,7 +29,7 @@
     }
 
     /* Título */
-    .title {
+    .title_new {
         text-align: center;
         font-size: 2.5rem;
         font-weight: bold;
@@ -38,27 +38,27 @@
     }
 
     /* Estilo del formulario */
-    .form {
+    .form_new {
         display: flex;
         flex-direction: column;
         gap: 20px;
     }
 
     /* Estilo de los campos del formulario */
-    .form-fields p {
+    .form-fields_new p {
         margin: 0;
         display: flex;
         flex-direction: column;
         gap: 10px;
     }
 
-    .form-fields label {
+    .form-fields_new label {
         font-weight: bold;
         color: #555;
     }
 
-    .form-fields input,
-    .form-fields textarea {
+    .form-fields_new input,
+    .form-fields_new textarea {
         padding: 10px;
         font-size: 1rem;
         border: 1px solid #ccc;
@@ -67,14 +67,14 @@
         transition: border-color 0.3s ease;
     }
 
-    .form-fields input:focus,
-    .form-fields textarea:focus {
+    .form-fields_new input:focus,
+    .form-fields_new textarea:focus {
         border-color: #007bff;
         box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
     }
 
     /* Estilo del botón de envío */
-    .submit-button {
+    .submit-button_new {
         background-color: #007bff;
         color: #fff;
         font-size: 1.2rem;
@@ -87,13 +87,13 @@
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
-    .submit-button:hover {
+    .submit-button_new:hover {
         background-color: #0056b3;
         transform: scale(1.05);
     }
 
     /* Estilo del mensaje de error */
-    .error {
+    .error_new {
         color: red;
         font-size: 1rem;
         text-align: center;

@@ -2,40 +2,46 @@
 <html lang="en">
 {% load static %}
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Django</title>
     <link rel="stylesheet" href="{% static 'css/stylesa.css' %}">
-
 </head>
 <body>
-    <nav>
-        <header>
-            <ul class="content_list">
-                <li><a href="/">Home</a></li>
-                <li><a href="{% url 'tareatodos' %}">Tareas de todos</a></li>
-                <li><a href="/perfil">Perfil</a></li>
+    <nav class="header-body">
+        <header class="header">
+            <button class="menu-btn" onclick="toggleMenu()">Menu</button>
+            <ul class="_headercontent_list">
+                <li><a href="/" class="_header_home-link">Home</a></li>
+                <li><a href="{% url 'tareatodos' %}" class="header_tareatodos-link">Tareas de todos</a></li>
+                <li><a href="/perfil" class="header_perfil-link">Perfil</a></li>
                 {% if user.is_authenticated %}
-                <li><a href="/tasks/new">Nueva Tarea</a></li>
-                <li><a href="/tasks">Tareas Personales</a></li>
-                <li><a href="{% url 'notifications' %}">
+                <li><a href="/tasks/new" class="header_new-task-link">Nueva Tarea</a></li>
+                <li><a href="/tasks" class="header_personal-tasks-link">Tareas Personales</a></li>
+                <li><a href="{% url 'notifications' %}" class="header_notifications-link">
                     Notificaciones
                     {% if unread_notifications %}
-                        <span class="badge">{{ unread_notifications }}</span>
+                        <span class="header_badge">{{ unread_notifications }}</span>
                     {% endif %}
                 </a></li>
-                <li><a href="/logout">Logout</a></li>
+                <li><a href="/logout" class="header_logout-link">Logout</a></li>
                 {% else %}
-                <li><a href="/signin">Login</a></li>
-                <li><a href="/signup">Registrar</a></li>
+                <li><a href="/signin" class="header_signin-link">Login</a></li>
+                <li><a href="/signup" class="header_signup-link">Registrar</a></li>
                 {% endif %}
             </ul>
         </header>
     </nav>
-    <section class="sections">
+    <section class="header_sections">
         {% block content %}
         {% endblock %}
     </section>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.content_list');
+            menu.classList.toggle('show');
+        }
+    </script>
 </body>
 </html>
