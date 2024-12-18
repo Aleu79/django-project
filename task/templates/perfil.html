@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<head>
+    <title>Perfil</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6; /* Fondo gris claro */
+        }
+
+        section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f3f4f6;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .text-success {
+            color: #4CAF50;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .text-error {
+            color: #F44336;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .text-info {
+            color: #666;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        a {
+            color: #2196F3;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        span {
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+
+<section>
+    <div class="container">
+        <h1>Perfil del Usuario</h1>
+        
+        {% if is_authenticated %}
+            <div>
+                <p class="text-success">¡Estás autenticado!</p>
+            </div>
+        {% else %}
+            <div>
+                <p class="text-error">No estás autenticado.</p>
+                <p class="text-info">Por favor, <a href="{% url 'signin' %}">inicia sesión</a>.</p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

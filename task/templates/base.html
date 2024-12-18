@@ -14,10 +14,11 @@
         <header>
             <ul class="content_list">
                 <li><a href="/">Home</a></li>
-                <li><a href="/tasks">Tareas Personales</a></li>
                 <li><a href="{% url 'tareatodos' %}">Tareas de todos</a></li>
-                <li><a href="/tasks/new">Nueva Tarea</a></li>
+                <li><a href="/perfil">Perfil</a></li>
                 {% if user.is_authenticated %}
+                <li><a href="/tasks/new">Nueva Tarea</a></li>
+                <li><a href="/tasks">Tareas Personales</a></li>
                 <li><a href="/logout">Logout</a></li>
                 {% else %}
                 <li><a href="/signin">Login</a></li>

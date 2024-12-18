@@ -9,6 +9,16 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     return render(request, 'home.html')
 
+def perfil(request):
+    if request.user.is_authenticated:
+        return render(request, 'perfil.html', {
+            'is_authenticated': True,
+        })
+    else:
+        return render(request, 'perfil.html', {
+            'is_authenticated': False,
+        })
+
 def error_page(request, message="Ha ocurrido un error inesperado"):
     """
     Función para mostrar una página de error con un mensaje personalizado.
@@ -36,7 +46,7 @@ def signup(request):
         "error": 'Las contraseñas no coinciden.'
     })
 
-@login_required
+@login_required(login_url='signup')
 def tasks(request):
     try:
         tareas_personales = Task.objects.filter(user=request.user, is_personal=True)
@@ -49,7 +59,7 @@ def tasks(request):
     except Exception as e:
         return error_page(request, f'Ocurrió un error al cargar las tareas: {str(e)}')
 
-@login_required
+@login_required(login_url='signup')
 def task_details(request, task_id):
     task = get_object_or_404(Task, pk=task_id)
     
@@ -88,7 +98,7 @@ def add_task_history(task, user, action):
     history.save()
 
 
-@login_required
+@login_required(login_url='signup')
 def edit_task(request, task_id):
     task = get_object_or_404(Task, pk=task_id, user=request.user)
 
@@ -112,7 +122,7 @@ def edit_task(request, task_id):
         form = formTask(instance=task)  
     return render(request, 'edit_task.html', {'form': form})
 
-@login_required
+@login_required(login_url='signup')
 def delete_task(request, task_id):
     try:
         task = get_object_or_404(Task, pk=task_id)    
@@ -132,7 +142,7 @@ def tareatodos(request):
     tareas = Task.objects.filter(is_personal=False)
     return render(request, 'taskall.html', {'tasks': tareas})
 
-@login_required
+@login_required(login_url='signup')
 def new_tasks(request):
     if request.method == 'POST':
         form = formTask(request.POST)
@@ -155,6 +165,7 @@ def new_tasks(request):
         form = formTask()
     return render(request, 'new_tasks.html', {'form': form})
 
+@login_required(login_url='signup')
 def signout(request):
     logout(request)
     return redirect('home')
