@@ -47,6 +47,22 @@
     <a href="{% url 'tasks' %}" class="back-linkdetails">Volver Atras</a>
 </div>
 
+<h3>Historial de la Tarea:</h3>
+{% if task_history %}
+    <ul>
+        {% for history in task_history %}
+            <li>
+                <strong>{{ history.user.username }}</strong> - 
+                {{ history.action }} - 
+                {{ history.created|date:"d/m/Y H:i" }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay historial para esta tarea.</p>
+{% endif %}
+
+
 <div class="comments-section">
     <h3>Comentarios</h3>
 
