@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="containerdetails">
+    <h1 class="titledetails">Task Details</h1>
+    <div class="banner-colordetails" style="background-color: {{ task.banner_color }}; height: 100px; width: 100%;"></div>
+
+    <div class="task-details">
+        <h2>{{ task.title }}</h2>
+        
+        <p><strong>Created:</strong> {{ task.created|date:"Y-m-d H:i" }}</p>  
+        
+        <p><strong>Description:</strong> {{ task.description }}</p>
+        
+        <p><strong>Important:</strong> 
+            <span class="importantdetails">{{ task.important|yesno:"Yes,No" }}</span>
+        </p>
+                
+        <p><strong>User:</strong> {{ task.user.username }}</p>
+        
+        <p><strong>Category:</strong> 
+            {% if task.category %}
+                {{ task.category.name }}
+            {% else %}
+                No Category
+            {% endif %}
+        </p>
+        
+        <p><strong>Status:</strong> {{ task.status.name }}</p>  
+        
+        <p><strong>Priority:</strong> {{ task.priority.level }}</p>  
+        
+        <p><strong>Completed:</strong> 
+            {% if task.date_completed %}
+                {{ task.date_completed|date:"Y-m-d" }}
+            {% else %}
+                Not Completed
+            {% endif %}
+        </p>
+    </div>
+    
+    <a href="{% url 'tasks' %}" class="back-linkdetails">Volver Atras</a>
+</div>
+{% endblock %}

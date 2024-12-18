@@ -69,3 +69,91 @@ li:hover{
     border-radius: 10px;
     border: 0;
 }
+
+/* de aca tenemos los estilos de nueva tarea */
+/* Estilos generales */
+.containerdetails {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+}
+
+/* Título */
+.titledetails {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #4c4f5c;
+    margin-bottom: 2rem;
+    animation: fadeIn 1s ease-out;
+}
+
+/* Detalles de la tarea */
+.task-details {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1.5s ease-out;
+}
+
+.task-details h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.task-details p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+/* Importante */
+.importantdetails {
+    font-weight: bold;
+    color: #e74c3c; /* Rojo para indicar que es importante */
+}
+
+/* Color de Banner */
+.banner-colordetails {
+    display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.banner-colordetails span {
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+/* Enlace de regreso */
+.back-linkdetails {
+    display: block;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #3498db;
+    margin-top: 2rem;
+    transition: all 0.3s ease;
+}
+
+.back-linkdetails:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

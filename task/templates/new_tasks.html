@@ -1,12 +1,119 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>New_Tasks</h1>
-<form  method="POST">
-    {% csrf_token %}
-    {{form}}
-    <button>
-        Save
-    </button>
-</form>
+<div class="container">
+    <h1 class="title">Crear Nueva Tarea</h1>
+
+    <form method="POST" class="form">
+        {% csrf_token %}
+        <div class="form-fields">
+            {{ form.as_p }}  
+        </div>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        <button type="submit" class="submit-button">Guardar Tarea</button>
+    </form>
+</div>
+
+<style>
+    /* Contenedor principal */
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Título */
+    .title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    /* Estilo del formulario */
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Estilo de los campos del formulario */
+    .form-fields p {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .form-fields label {
+        font-weight: bold;
+        color: #555;
+    }
+
+    .form-fields input,
+    .form-fields textarea {
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-fields input:focus,
+    .form-fields textarea:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+    }
+
+    /* Estilo del botón de envío */
+    .submit-button {
+        background-color: #007bff;
+        color: #fff;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .submit-button:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    /* Estilo del mensaje de error */
+    .error {
+        color: red;
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    /* Estilos responsivos */
+    @media (max-width: 768px) {
+        .container {
+            padding: 15px;
+        }
+
+        .title {
+            font-size: 2rem;
+        }
+
+        .submit-button {
+            font-size: 1rem;
+            padding: 10px 20px;
+        }
+    }
+</style>
+
 {% endblock %}
