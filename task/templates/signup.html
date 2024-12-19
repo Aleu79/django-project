@@ -1,25 +1,36 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Signup</h1>
-{% if error %}
-    <p style="color: red;">{{ error }}</p>
-{% endif %}
-<form method="POST">
-    {% csrf_token %}
-    <label for="id_username">Usuario: </label>
-    <input type="text" name="username" required>
-    <br>
-    <label for="id_gmail">Correo: </label>
-    <input type="email" name="gmail" required>
-    <br>
-    <label for="id_password">Contraseña:</label>
-    <input type="password" name="password1" required>
-    <br>
-    <label for="id_password2">Repite Contraseña:</label>
-    <input type="password" name="password2" required>
-    <br>
-    <button type="submit">Registrarse</button>
-</form>
+<div class="body_signin">
+    <div class="container_signin">
+        <h1 class="h1_signin">Registrar</h1>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST" class="form_signin">
+            {% csrf_token %}
+            
+            <label for="id_username" class="label_signin">Usuario:</label>
+            <input type="text" name="username" class="input_signin" required>
+
+            <label for="id_gmail" class="label_signin">Correo:</label>
+            <input type="email" name="gmail" class="input_signin" required>
+
+            <label for="id_password" class="label_signin">Contraseña:</label>
+            <input type="password" name="password1" class="input_signin" required>
+
+            <label for="id_password2" class="label_signin">Repite Contraseña:</label>
+            <input type="password" name="password2" class="input_signin" required>
+
+            <button type="submit" class="btn_signin">Registrarse</button>
+        </form>
+
+        <div class="signup-link">
+            <p>¿Ya tienes una cuenta? <a href="{% url 'signin' %}" class="signup-link-text">Inicia sesión aquí</a>.</p>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

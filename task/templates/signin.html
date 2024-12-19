@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 
+<body class="body_signin">
 {% block content %}
-<h1>Signin</h1>
-
-{{error}}
-
-<form action="/signin/" method="POST">
-    {% csrf_token %}
-    <label for="id_username">Username:</label>
-    <input type="text" name="username">
-    <label for="id_password">Password</label>
-    <input type="password" name="password" id="id_password">
-    <button>
-        Signin
-    </button>
-</form>
+<div class="container_signin">
+    <h1 class="h1_signin">Login</h1>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+    <form action="/signin/" method="POST" class="form_signin">
+        {% csrf_token %}
+        <label class="label_signin" for="id_username">Username:</label>
+        <input class="input_signin" type="text" name="username">
+        <label class="label_signin" for="id_password">Password:</label>
+        <input class="input_signin" type="password" name="password" id="id_password">
+        <button class="btn_signin">Login</button>
+    </form>
+</div>
 {% endblock %}
+</body>

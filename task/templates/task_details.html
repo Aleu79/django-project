@@ -1,23 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<script>
+    function toggleSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        const icon = section.previousElementSibling.querySelector('.toggle-icon');
+        
+        if (section.style.display === "none" || section.style.display === "") {
+            section.style.display = "block";
+            icon.textContent = "↓";  // Cambiar la flecha hacia abajo cuando se expanda
+        } else {
+            section.style.display = "none";
+            icon.textContent = "↑";  // Cambiar la flecha hacia arriba cuando se colapse
+        }
+    }
+</script>
+
 <div class="containerdetails">
     <h1 class="titledetails">Task Details</h1>
-    <div class="banner-colordetails" style="background-color: {{ task.banner_color }}; height: 100px; width: 100%;"></div>
+    <div class="banner-colordetails" style="background-color: {{ task.banner_color }};"></div>
 
     <div class="task-details">
         <h2>{{ task.title }}</h2>
-        
         <p><strong>Created:</strong> {{ task.created|date:"Y-m-d H:i" }}</p>  
-        
         <p><strong>Description:</strong> {{ task.description }}</p>
-        
         <p><strong>Important:</strong> 
             <span class="importantdetails">{{ task.important|yesno:"Yes,No" }}</span>
         </p>
-                
         <p><strong>User:</strong> {{ task.user.username }}</p>
-        
         <p><strong>Category:</strong> 
             {% if task.category %}
                 {{ task.category.name }}
@@ -25,11 +35,8 @@
                 No Category
             {% endif %}
         </p>
-        
         <p><strong>Status:</strong> {{ task.status.name }}</p>  
-        
         <p><strong>Priority:</strong> {{ task.priority.level }}</p>  
-        
         <p><strong>Completed:</strong> 
             {% if task.date_completed %}
                 {{ task.date_completed|date:"Y-m-d" }}
@@ -47,45 +54,52 @@
     <a href="{% url 'tasks' %}" class="back-linkdetails">Volver Atras</a>
 </div>
 
-<h3>Historial de la Tarea:</h3>
-{% if task_history %}
-    <ul>
-        {% for history in task_history %}
-            <li>
-                <strong>{{ history.user.username }}</strong> - 
-                {{ history.action }} - 
-                {{ history.created|date:"d/m/Y H:i" }}
+<!-- Contenedor de Historial de Tarea -->
+<div class="containersection">
+    <h3 class="toggle-section" onclick="toggleSection('task-history')">Historial de la Tarea <span class="toggle-icon">↑</span></h3>
+    <div id="task-history" class="collapsible-section">
+        {% if task_history %}
+            <ul class="task-history-list">
+                {% for history in task_history %}
+                    <li class="task-history-item">
+                        <strong>{{ history.user.username }}</strong> - 
+                        {{ history.action }} - 
+                        {{ history.created|date:"d/m/Y H:i" }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No hay historial para esta tarea.</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Contenedor de Comentarios -->
+<div class="containersection">
+    <h3 class="toggle-section" onclick="toggleSection('comments')">Comentarios <span class="toggle-icon">↑</span></h3>
+
+    <div id="comments" class="collapsible-section">
+        <form method="POST" class="comment-form">
+            {% csrf_token %}
+            {{ form.as_p }}  
+            <button type="submit" class="btn-submit">Comentar</button>
+        </form>
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <ul class="comments-list">
+            {% for comment in comments %}
+            <li class="comment-item">
+                <p><strong>{{ comment.user.username }}</strong> <span class="comment-time">({{ comment.created|date:"Y-m-d H:i" }})</span></p>
+                <p>{{ comment.comment }}</p>
             </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No hay historial para esta tarea.</p>
-{% endif %}
-
-
-<div class="comments-section">
-    <h3>Comentarios</h3>
-
-    <form method="POST" class="comment-form">
-        {% csrf_token %}
-        {{ form.as_p }}  
-        <button type="submit" class="btn-submit">Comentar</button>
-    </form>
-
-    {% if error %}
-    <p class="error">{{ error }}</p>
-    {% endif %}
-
-    <ul class="comments-list">
-        {% for comment in comments %}
-        <li class="comment-item">
-            <p><strong>{{ comment.user.username }}</strong> <span class="comment-time">({{ comment.created|date:"Y-m-d H:i" }})</span></p>
-            <p>{{ comment.comment }}</p>
-        </li>
-        {% empty %}
-        <p>No hay comentarios aún.</p>
-        {% endfor %}
-    </ul>
+            {% empty %}
+            <p>No hay comentarios aún.</p>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 
 {% endblock %}

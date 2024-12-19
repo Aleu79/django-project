@@ -10,14 +10,16 @@ from django.core.exceptions import ValidationError
 
 
 def home(request):
-    if not request.user.is_authenticated:
-        return redirect('signin')  
+    unread_notifications = 0
 
-    unread_notifications = TaskNotification.objects.filter(user=request.user, read=False).count()
+    if request.user.is_authenticated:
+        unread_notifications = TaskNotification.objects.filter(user=request.user, read=False).count()
+
     return render(request, 'home.html', {
         'unread_notifications': unread_notifications
     })
 
+@login_required(login_url='signup')
 def create_task_notification(task, user, message):
     notification = TaskNotification(
         task=task,
@@ -96,6 +98,7 @@ def signup(request):
         return render(request, 'signup.html', {
             "error": 'Las contraseñas no coinciden.'
         })
+    
 
 
 @login_required(login_url='signup')
@@ -126,7 +129,6 @@ def task_details(request, task_id):
 
             add_task_history(task, request.user, "Comentario Agregado")
             
-            # Crear notificación solo si el comentario no es del propietario de la tarea
             if request.user != task.user:
                 create_task_notification(
                     task,
@@ -148,6 +150,7 @@ def task_details(request, task_id):
         'task_history': task_history  
     })
 
+@login_required(login_url='signup')
 def add_task_history(task, user, action):
     """
     Función para agregar un registro al historial de la tarea.
@@ -195,6 +198,7 @@ def delete_task(request, task_id):
 
     except Exception as e:
         return error_page(request, f'Ocurrió un error al intentar eliminar la tarea: {str(e)}')
+
 
 def tareatodos(request):
     tareas = Task.objects.filter(is_personal=False)

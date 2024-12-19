@@ -1,16 +1,117 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <h1 class="title">Editar Tarea</h1>
-    <form method="POST">
+<div class="container_edit">
+    <h1 class="title_edit">Editar Tarea</h1>
+    <form method="POST" class="form_edit">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Guardar cambios</button>
+        <button class="btn_edit" type="submit">Guardar cambios</button>
     </form>
 
     {% if error %}
-        <p class="error">{{ error }}</p>
+        <p class="error_edit">{{ error }}</p>
     {% endif %}
 </div>
+
+<style>
+    .container_edit {
+        width: 100%;
+        max-width: 600px;
+        margin: 30px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        font-family: 'Arial', sans-serif;
+    }
+
+    .title_edit {
+        font-size: 2.2rem;
+        color: #333;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .form_edit {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .form_edit input, .form_edit textarea, .form_edit button {
+        padding: 12px;
+        font-size: 1.1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        width: 100%;
+        box-sizing: border-box;
+        transition: all 0.3s ease;
+    }
+
+    .form_edit input:focus, .form_edit textarea:focus {
+        border-color: #4CAF50;
+        outline: none;
+    }
+
+    .form_edit button {
+        background-color: #4CAF50;
+        color: white;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        border: none;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+    .form_edit button:hover {
+        background-color: #45a049;
+    }
+
+    .error_edit {
+        color: #ff0000;
+        font-size: 1.1rem;
+        text-align: center;
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #fff0f0;
+        border: 1px solid #ff0000;
+        border-radius: 8px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .container_edit {
+            max-width: 90%;
+            padding: 20px;
+        }
+
+        .title_edit {
+            font-size: 1.8rem;
+        }
+
+        .form_edit input, .form_edit textarea, .form_edit button {
+            font-size: 1rem;
+            padding: 10px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .container_edit {
+            max-width: 95%;
+            padding: 15px;
+        }
+
+        .title_edit {
+            font-size: 1.5rem;
+        }
+
+        .form_edit input, .form_edit textarea, .form_edit button {
+            font-size: 0.95rem;
+            padding: 8px;
+        }
+    }
+</style>
+
 {% endblock %}
