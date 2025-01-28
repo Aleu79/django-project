@@ -1,35 +1,56 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="body_signin">
-    <div class="container_signin">
-        <h1 class="h1_signin">Registrar</h1>
+<div class="min-h-screen flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+        <div class="text-center">
+            <h2 class="text-2xl font-semibold text-gray-600">¡Bienvenido!</h2>
+            <h1 class="text-4xl font-extrabold text-gray-900">Crea tu cuenta</h1>
+        </div>
 
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
-
-        <form method="POST" class="form_signin">
+        <form method="POST" class="mt-8 space-y-8" action="#">
             {% csrf_token %}
             
-            <label for="id_username" class="label_signin">Usuario:</label>
-            <input type="text" name="username" class="input_signin" required>
+            <div class="rounded-md shadow-sm space-y-4">
+                <div>
+                    <label for="id_username" class="sr-only">Nombre de Usuario</label>
+                    <input type="text" name="username" id="id_username" 
+                           class="appearance-none  relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                           placeholder="Ingresa tu nombre de usuario" required>
+                </div>
+                <div>
+                    <label for="id_gmail" class="sr-only">Correo electrónico</label>
+                    <input type="email" name="gmail" id="id_gmail" 
+                           class="appearance-none  relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                           placeholder="Escribe tu correo electrónico" required>
+                </div>
+                <div>
+                    <label for="id_password" class="sr-only">Contraseña</label>
+                    <input type="password" name="password1" id="id_password" 
+                           class="appearance-none  relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                           placeholder="Crea una contraseña segura" required>
+                </div>
+                <div>
+                    <label for="id_password2" class="sr-only">Confirmar Contraseña</label>
+                    <input type="password" name="password2" id="id_password2" 
+                           class="appearance-none  relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                           placeholder="Confirma tu contraseña" required>
+                </div>
+            </div>
 
-            <label for="id_gmail" class="label_signin">Correo:</label>
-            <input type="email" name="gmail" class="input_signin" required>
+            <div class="text-center">
+                <p class="mt-2 text-sm text-gray-600">
+                    ¿Ya tienes cuenta? <a href="{% url 'signin' %}" class="font-medium text-blue-500 hover:text-blue-700">Inicia sesión aquí</a>.
+                </p>            
+            </div>
 
-            <label for="id_password" class="label_signin">Contraseña:</label>
-            <input type="password" name="password1" class="input_signin" required>
-
-            <label for="id_password2" class="label_signin">Repite Contraseña:</label>
-            <input type="password" name="password2" class="input_signin" required>
-
-            <button type="submit" class="btn_signin">Registrarse</button>
+            <div>
+                <button type="submit" 
+                        class="group relative w-full py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Registrarse
+                </button>
+            </div>
         </form>
-
-        <div class="signup-link">
-            <p>¿Ya tienes una cuenta? <a href="{% url 'signin' %}" class="signup-link-text">Inicia sesión aquí</a>.</p>
-        </div>
     </div>
 </div>
 

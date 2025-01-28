@@ -1,46 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Django</title>
+    <title>Gestor de Tareas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/stylesa.css' %}">
 </head>
-<body>
-    <nav class="header-body">
-        <header class="header">
-            <button class="menu-btn" onclick="toggleMenu()">Menu</button>
-            <ul class="_headercontent_list">
-                <li><a href="/" class="_header_home-link">Home</a></li>
-                <li><a href="{% url 'tareatodos' %}" class="header_tareatodos-link">Tareas de todos</a></li>
-                <li><a href="/perfil" class="header_perfil-link">Perfil</a></li>
+
+<body class="bg-white font-sans">
+    <header class="bg-white">
+        <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+            <div class="flex lg:flex-1">
+                <a href="#" class="-m-1.5 p-1.5">
+                    <span class="sr-only">Gestor de Tareas</span>
+                    <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="">
+                </a>
+            </div>
+            <div class="flex lg:hidden">
+                <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" onclick="toggleMenu()">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+            <div class="hidden lg:flex lg:gap-x-12">
+                <a href="/" class="text-sm font-semibold text-gray-900 hover:text-blue-500">Home</a>
+                <a href="{% url 'tareatodos' %}" class="text-sm font-semibold text-gray-900 hover:text-blue-500">Tareas de todos</a>
+                <a href="/perfil" class="text-sm font-semibold text-gray-900 hover:text-blue-500">Perfil</a>
                 {% if user.is_authenticated %}
-                <li><a href="/tasks/new" class="header_new-task-link">Nueva Tarea</a></li>
-                <li><a href="/tasks" class="header_personal-tasks-link">Tareas Personales</a></li>
-                <li><a href="{% url 'notifications' %}" class="header_notifications-link">
-                    Notificaciones
-                    {% if unread_notifications %}
-                        <span class="header_badge">{{ unread_notifications }}</span>
-                    {% endif %}
-                </a></li>
-                <li><a href="/logout" class="header_logout-link">Logout</a></li>
+                    <a href="/tasks/new" class="text-sm font-semibold text-gray-900 hover:text-blue-500">Nueva Tarea</a>
+                    <a href="/tasks" class="text-sm font-semibold text-gray-900 hover:text-blue-500">Tareas Personales</a>
+                    <a href="{% url 'notifications' %}" class="relative flex items-center text-sm font-semibold text-gray-900 hover:text-blue-500">
+                        Notificaciones
+                        {% if unread_notifications %}
+                            <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-600 rounded-full">
+                                {{ unread_notifications }}
+                            </span>
+                        {% endif %}
+                    </a>
+                    <a href="/logout" class="text-sm font-semibold text-gray-900 hover:text-blue-500">Logout</a>
                 {% else %}
-                <li><a href="/signin" class="header_signin-link">Login</a></li>
-                <li><a href="/signup" class="header_signup-link">Registrar</a></li>
+                    <a href="/signin" class="text-sm font-semibold text-gray-900 hover:text-blue-500">Login</a>
+                    <a href="/signup" class="text-sm font-semibold text-gray-900 hover:text-blue-500">Registrar</a>
                 {% endif %}
-            </ul>
-        </header>
-    </nav>
-    <section class="header_sections">
-        {% block content %}
-        {% endblock %}
-    </section>
+            </div>
+        </nav>
+        <ul class="md:hidden px-6 py-4 space-y-4 hidden bg-white" id="mobileMenu">
+            <li><a href="/" class="text-gray-700 hover:text-blue-500">Home</a></li>
+            <li><a href="{% url 'tareatodos' %}" class="text-gray-700 hover:text-blue-500">Tareas de todos</a></li>
+            <li><a href="/perfil" class="text-gray-700 hover:text-blue-500">Perfil</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="/tasks/new" class="text-gray-700 hover:text-blue-500">Nueva Tarea</a></li>
+                <li><a href="/tasks" class="text-gray-700 hover:text-blue-500">Tareas Personales</a></li>
+                <li>
+                    <a href="{% url 'notifications' %}" class="relative flex items-center text-gray-700 hover:text-blue-500">
+                        Notificaciones
+                        {% if unread_notifications %}
+                            <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-600 rounded-full">
+                                {{ unread_notifications }}
+                            </span>
+                        {% endif %}
+                    </a>
+                </li>
+                <li><a href="/logout" class="text-gray-700 hover:text-blue-500">Logout</a></li>
+            {% else %}
+                <li><a href="/signin" class="text-gray-700 hover:text-blue-500">Login</a></li>
+                <li><a href="/signup" class="text-gray-700 hover:text-blue-500">Registrar</a></li>
+            {% endif %}
+        </ul>
+    </header>
+
+    {% block content %}
+    {% endblock %}
 
     <script>
         function toggleMenu() {
-            const menu = document.querySelector('._headercontent_list');
-            menu.classList.toggle('show');  
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
         }
     </script>
 </body>

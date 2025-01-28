@@ -1,170 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <style>
-    @import url("https://fonts.googleapis.com/css?family=Lato:400i,600");
+  <section class="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-12">
+    <div class="max-w-7xl mx-auto px-6 sm:px-12 text-center">
+        <h1 class="text-4xl font-extrabold sm:text-5xl">Notificaciones</h1>
+        <p class="mt-4 text-lg sm:text-xl">
+            Mantente al tanto de las últimas actualizaciones y eventos.
+        </p>
+    </div>
+  </section>
 
-    bodynoti {
-      margin: 0;
-      padding: 20vmin 20vmin 20vmin 30vmin;
-      text-align: center;
-      font-family: 'Lato', sans-serif;
-      color: rgba(0, 0, 0, 0.6);
-      font-weight: 400;
-      font-style: italic;
-      -webkit-font-smoothing: antialiased;
-      background-color: #f7f7f7;
-    }
-
-    .containernoti {
-      max-width: 800px;
-      margin: auto;
-      padding: 20px;
-      text-align: left;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      animation: popFromBottom 0.5s ease-in-out;
-    }
-
-    @keyframes popFromBottom {
-      0% {
-        transform: translateY(300px) scale(0.9);
-      }
-      100% {
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .notih1 {
-      font-size: 2rem;
-      color: rgba(0, 0, 0, 0.8);
-      text-align: center;
-      margin-bottom: 20px;
-      font-style: normal;
-    }
-
-    .notiul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    li.notification {
-      display: flex;
-      align-items: center;
-      margin-bottom: 15px;
-      padding: 20px;
-      background: #ffe271;
-      border-radius: 0 50px 50px 0;
-      font-size: 1rem;
-      color: #333;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    li.notification.read {
-      background: #e6f7e6;
-    }
-
-    .profile-noti {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      overflow: hidden;
-      margin-right: 20px;
-      flex-shrink: 0;
-      border: 3px solid #fff;
-    }
-
-    .profile-noti img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .message-noti {
-      flex-grow: 1;
-      font-size: 1rem;
-    }
-
-    .time-noti {
-      display: block;
-      font-size: 0.8rem;
-      color: rgba(0, 0, 0, 0.6);
-      margin-top: 5px;
-    }
-
-    .mark-read-btn-noti {
-      background: #007bff;
-      color: #fff;
-      text-decoration: none;
-      padding: 10px 15px;
-      font-size: 0.9rem;
-      border-radius: 20px;
-      transition: background-color 0.3s ease;
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .mark-read-btn-noti:hover {
-      background-color: #0056b3;
-    }
-
-    .no-notifications-noti {
-      text-align: center;
-      font-size: 1rem;
-      color: rgba(0, 0, 0, 0.6);
-    }
-
-    @media (max-width: 600px) {
-      .containernoti {
-        padding: 15px;
-      }
-
-      .notih1 {
-        font-size: 1.5rem;
-      }
-
-      li.notification {
-        flex-direction: column;
-        padding: 15px;
-      }
-
-      .mark-read-btn-noti {
-        position: static;
-        transform: none;
-        margin-top: 10px;
-        text-align: center;
-      }
-    }
-  </style>
-
-  <section>
-    <div class="containernoti">
-      <h1 class="notih1">Notificaciones</h1>
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-6 sm:px-8 bg-white shadow-xl rounded-lg p-6">
       {% if notifications %}
-        <ul class="notiul">
+        <ul class="space-y-6">
           {% for notification in notifications %}
-            <li class="notification{% if notification.read %} read{% endif %}">
-              <div class="profile-noti">
-                <img src="https://via.placeholder.com/50" alt="Profile">
+            <li class="flex items-center p-6 bg-green-100 rounded-lg shadow-md relative hover:bg-green-300 transition-colors">
+              <div class="w-14 h-14 rounded-full overflow-hidden border-4 border-white">
+                <img src="https://via.placeholder.com/50" alt="Profile" class="w-full h-full object-cover">
               </div>
-              <div class="message-noti">
-                <p>{{ notification.message }}</p>
-                <span class="time-noti">{{ notification.created }}</span>
+              <div class="ml-6 flex-grow">
+                <p class="text-lg text-gray-800 font-medium">{{ notification.message }}</p>
+                <span class="block text-sm text-gray-500 mt-2">{{ notification.created }}</span>
               </div>
               {% if not notification.read %}
-                <a href="{% url 'mark_as_read' notification.id %}" class="mark-read-btn-noti">Marcar como leído</a>
+                <a href="{% url 'mark_as_read' notification.id %}" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-blue-500 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-600 transition-colors">Marcar como leído</a>
               {% endif %}
             </li>
           {% endfor %}
         </ul>
       {% else %}
-        <p class="no-notifications-noti">No tienes notificaciones.</p>
+        <p class="text-center text-lg text-gray-500">No tienes notificaciones.</p>
       {% endif %}
     </div>
   </section>

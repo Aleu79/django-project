@@ -1,49 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="home-container">
-    <h1 class="title">Bienvenido a la Gestión de Tareas</h1>
-    <p class="intro-text">
-        Este es tu centro de control para gestionar tareas de manera eficiente. Lleva un registro de tus tareas, márcalas como completadas y mantén todo organizado.
-    </p>
-    <p class="description">
-        Nuestro sistema te permite crear, editar y eliminar tareas de manera sencilla. Organiza tus pendientes y mantén tu productividad al máximo. Ya sea en tu vida personal o profesional, aquí encontrarás todo lo que necesitas para mantenerte al día con tus compromisos.
-    </p>
+<div class="bg-white">
+    <div class="mx-auto max-w-7xl py-8 sm:px-6 sm:py-16 lg:px-8">
+        <div class="relative isolate overflow-hidden bg-white px-6 pt-8 sm:rounded-3xl sm:px-16 md:pt-12 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+            <div class="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-16 lg:text-left">
+                <h2 class="text-3xl font-semibold tracking-tight text-black sm:text-4xl">Bienvenido a la Gestión de Tareas</h2>
+                <p class="mt-6 text-lg text-black">Este es tu centro de control para gestionar tareas de manera eficiente. Lleva un registro de tus tareas, márcalas como completadas y mantén todo organizado.</p>
+                <div class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
+                    <a href="#" class="rounded-md bg-gray-100 px-3.5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-gray-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-200">Get started</a>
+                    <a href="#" class="text-sm font-semibold text-blue-500 hover:text-blue-700">Learn more <span aria-hidden="true">→</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<!-- Estilos CSS -->
-<style>
-    .home-container {
-        max-width: 900px;
-        margin: 40px auto;
-        padding: 30px;
-        background: #f4f4f9;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .title {
-        text-align: center;
-        font-size: 3rem;
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    .intro-text {
-        text-align: center;
-        font-size: 1.5rem;
-        color: #555;
-        margin-bottom: 20px;
-    }
-
-    .description {
-        font-size: 1rem;
-        line-height: 1.6;
-        color: #666;
-    }
-
-    .home-container p {
-        margin-bottom: 20px;
-    }
-</style>
 {% endblock %}

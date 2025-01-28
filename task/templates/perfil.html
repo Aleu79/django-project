@@ -1,90 +1,52 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<head>
-    <title>Perfil</title>
-    <style>
-        /* Estilos generales */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f3f4f6; /* Fondo gris claro */
-        }
+<section class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-12">
+    <div class="container max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl font-extrabold mb-4">Perfil del Usuario</h1>
+        <p class="text-lg font-light">
+            Gestiona tu información personal y personaliza tu experiencia en la plataforma.
+        </p>
+    </div>
+</section>
 
-        section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background-color: #f3f4f6;
-        }
-
-        .container {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .text-success {
-            color: #4CAF50;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .text-error {
-            color: #F44336;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .text-info {
-            color: #666;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-
-        a {
-            color: #2196F3;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        span {
-            font-weight: bold;
-            color: #333;
-        }
-    </style>
-</head>
-
-<section>
-    <div class="container">
-        <h1>Perfil del Usuario</h1>
-        
+<section class="bg-gray-50 py-12">
+    <div class="container max-w-4xl mx-auto px-6">
         {% if is_authenticated %}
-            <div>
-                <p class="text-success">¡Estás autenticado!</p>
+            <div class="bg-white shadow-md rounded-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">¡Bienvenido de nuevo, {{ user.username }}!</h2>
+                <p class="text-gray-600">Aquí puedes actualizar tu información o explorar tus actividades recientes.</p>
+                <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="bg-indigo-100 p-4 rounded-lg flex items-center">
+                        <svg class="w-12 h-12 text-indigo-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M96 0C60.7 0 32 28.7 32 64v384c0 35.3 28.7 64 64 64h320c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H96zM176 224h160c8.8 0 16 7.2 16 16s-7.2 16-16 16H176c-8.8 0-16-7.2-16-16s7.2-16 16-16zm160 96H176c-8.8 0-16-7.2-16-16s7.2-16 16-16h160c8.8 0 16 7.2 16 16s-7.2 16-16 16z"/>
+                        </svg>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">Editar Perfil</h3>
+                            <p class="text-gray-600 text-sm">Actualiza tu información personal.</p>
+                        </div>
+                    </div>
+                    <div class="bg-indigo-100 p-4 rounded-lg flex items-center">
+                        <svg class="w-12 h-12 text-indigo-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zm-248-88c-48.523 0-88 39.477-88 88s39.477 88 88 88 88-39.477 88-88-39.477-88-88-88zm0 136c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48z"/>
+                        </svg>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">Configuración</h3>
+                            <p class="text-gray-600 text-sm">Gestiona las preferencias de tu cuenta.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 text-right">
+                    <a href="{% url 'logout' %}" class="text-red-500 hover:underline">Cerrar sesión</a>
+                </div>
             </div>
         {% else %}
-            <div>
-                <p class="text-error">No estás autenticado.</p>
-                <p class="text-info">Por favor, <a href="{% url 'signin' %}">inicia sesión</a>.</p>
+            <div class="bg-white shadow-md rounded-lg p-8 text-center">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">¡Oops! No estás autenticado.</h2>
+                <p class="text-gray-600 mb-6">Inicia sesión para acceder a tu perfil y personalizar tu experiencia.</p>
+                <a href="{% url 'signin' %}" class="bg-indigo-500 text-white px-6 py-3 rounded-lg hover:bg-indigo-600">Iniciar sesión</a>
             </div>
         {% endif %}
     </div>
 </section>
-
 {% endblock %}

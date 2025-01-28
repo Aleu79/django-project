@@ -1,20 +1,51 @@
 {% extends 'base.html' %}
-
-<body class="body_signin">
 {% block content %}
-<div class="container_signin">
-    <h1 class="h1_signin">Login</h1>
-    {% if error %}
-        <p class="error">{{ error }}</p>
-    {% endif %}
-    <form action="/signin/" method="POST" class="form_signin">
-        {% csrf_token %}
-        <label class="label_signin" for="id_username">Username:</label>
-        <input class="input_signin" type="text" name="username">
-        <label class="label_signin" for="id_password">Password:</label>
-        <input class="input_signin" type="password" name="password" id="id_password">
-        <button class="btn_signin">Login</button>
-    </form>
+
+<div class="min-h-screen flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+        <div class="text-center">
+            <h2 class="text-2xl font-semibold text-gray-600">¡Bienvenido de nuevo!</h2>
+            <h1 class="text-4xl font-extrabold text-gray-900">Iniciar sesión</h1>
+        </div>
+
+        <form method="POST" class="mt-8 space-y-6" action="/signin/">
+            {% csrf_token %}
+            
+            <div class="rounded-md shadow-sm space-y-4">
+                <div>
+                    <label for="id_username" class="sr-only">Nombre de Usuario</label>
+                    <input type="text" name="username" id="id_username" 
+                           class="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                           placeholder="Ingresa tu nombre de usuario" required>
+                </div>
+                <div>
+                    <label for="id_password" class="sr-only">Contraseña</label>
+                    <input type="password" name="password" id="id_password" 
+                           class="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                           placeholder="Ingresa tu contraseña" required>
+                </div>
+            </div>
+
+            {% if error %}
+                <div class="text-center text-red-500 text-sm mt-2">
+                    <p>{{ error }}</p>
+                </div>
+            {% endif %}
+
+            <div class="text-center">
+                <p class="mt-2 text-sm text-gray-600">
+                    ¿No tienes cuenta? <a href="{% url 'signup' %}" class="font-medium text-blue-500 hover:text-blue-700">Regístrate aquí</a>.
+                </p>            
+            </div>
+
+            <div>
+                <button type="submit" 
+                        class="group relative w-full py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Iniciar sesión
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
+
 {% endblock %}
-</body>

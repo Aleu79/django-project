@@ -1,88 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<style>
-    .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        font-family: 'Arial', sans-serif;
-    }
+<div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-12">
+    <div class="max-w-7xl mx-auto px-6 sm:px-12 text-center">
+        <h1 class="text-4xl font-extrabold sm:text-5xl">Explora Tareas Públicas</h1>
+        <p class="mt-4 text-lg sm:text-xl">
+            Descubre tareas compartidas por otros usuarios y participa en proyectos colaborativos.
+        </p>
+    </div>
+</div>
 
-    .title {
-        text-align: center;
-        font-size: 2rem;
-        color: #333;
-        margin-bottom: 20px;
-        border-bottom: 2px solid #4CAF50;
-        padding-bottom: 10px;
-    }
-
-    .task-list {
-        list-style: none;
-        padding: 0;
-    }
-
-    .task-item {
-        background-color: #ffffff;
-        margin: 15px 0;
-        padding: 15px;
-        border-left: 5px solid #4CAF50;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .task-item h3 {
-        font-size: 1.5rem;
-        color: #4CAF50;
-        margin: 0 0 10px;
-    }
-
-    .task-item p {
-        font-size: 1rem;
-        color: #555;
-        margin: 5px 0;
-    }
-
-    .task-item a {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 8px 12px;
-        background-color: #4CAF50;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 5px;
-        font-size: 0.9rem;
-        transition: background-color 0.3s ease;
-    }
-
-    .task-item a:hover {
-        background-color: #45a049;
-    }
-
-    .task-item a:active {
-        background-color: #3e8e41;
-    }
-</style>
-
-<div class="container">
-    <h1 class="title">Tareas Públicas</h1>
-    {% if tasks %}
-        <ul class="task-list">
-            {% for task in tasks %}
-                <li class="task-item">
-                    <h3>{{ task.title }}</h3>
-                    <p>{{ task.description }}</p>
-                    <p><strong>Creador:</strong> {{ task.user.username|default:"Anónimo" }}</p>
-                    <a href="{% url 'task_details' task.id %}">Ver detalles</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No hay tareas públicas disponibles.</p>
-    {% endif %}
+<div class="bg-gradient-to-b from-blue-50 to-white min-h-screen py-12 px-6 sm:px-12">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 text-center mb-8 sm:text-4xl">Tareas Públicas</h2>
+        
+        {% if tasks %}
+            <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {% for task in tasks %}
+                    <li class="rounded-lg shadow-md overflow-hidden transition transform hover:scale-105 hover:shadow-lg">
+                        <div class="h-20" style="background-color: {{ task.banner_color }}"></div>                        
+                        <div class="bg-white p-6">
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-2">{{ task.title }}</h3>
+                            <p class="text-gray-600 mb-4">{{ task.description }}</p>
+                            <p class="text-sm text-gray-500 mb-4">
+                                <strong>Creador:</strong> {{ task.user.username|default:"Anónimo" }}
+                            </p>
+                            <a href="{% url 'task_details' task.id %}" class="inline-block bg-blue-500 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-600">Ver detalles</a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-center text-gray-700 text-lg mt-8">No hay tareas públicas disponibles.</p>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}
