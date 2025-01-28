@@ -39,7 +39,14 @@ class formTask(forms.ModelForm):
 class formTaskComment(forms.ModelForm):
     class Meta:
         model = TaskComment
-        fields = ['comment']  
+        fields = ['comment']
+        widgets = {
+            'comment': forms.Textarea(attrs={
+                'class': 'w-full max-w-md p-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 resize-none',
+                'rows': 3,  
+                'placeholder': 'Escribe tu comentario aquí...',
+            }),
+        }
 
     def clean_comment(self):
         comment = self.cleaned_data.get('comment')

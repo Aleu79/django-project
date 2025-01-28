@@ -3,16 +3,94 @@
 {% block content %}
 <div class="bg-white">
     <div class="mx-auto max-w-7xl py-8 sm:px-6 sm:py-16 lg:px-8">
-        <div class="relative isolate overflow-hidden bg-white px-6 pt-8 sm:rounded-3xl sm:px-16 md:pt-12 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+        <div class="relative isolate overflow-hidden bg-white px-6 pt-8 sm:rounded-3xl sm:px-16 md:pt-12 lg:flex lg:items-center lg:gap-x-20 lg:px-24 lg:pt-0">
             <div class="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-16 lg:text-left">
                 <h2 class="text-3xl font-semibold tracking-tight text-black sm:text-4xl">Bienvenido a la Gestión de Tareas</h2>
                 <p class="mt-6 text-lg text-black">Este es tu centro de control para gestionar tareas de manera eficiente. Lleva un registro de tus tareas, márcalas como completadas y mantén todo organizado.</p>
                 <div class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
-                    <a href="#" class="rounded-md bg-gray-100 px-3.5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-gray-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-200">Get started</a>
-                    <a href="#" class="text-sm font-semibold text-blue-500 hover:text-blue-700">Learn more <span aria-hidden="true">→</span></a>
+                    <a href="/perfil" class="rounded-md bg-gray-100 px-3.5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-gray-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-200 flex items-center gap-x-2">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Empezar</span>
+                    </a>
+                    <button onclick="scrollToInfo()" class="text-sm font-semibold text-blue-500 hover:text-blue-700 flex items-center gap-x-2">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Más información</span> <span aria-hidden="true">→</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="lg:flex-shrink-0 lg:flex lg:items-center lg:justify-center">
+                <img src="../static/img/ilustration.jpg" alt="Imagen de ejemplo" class="w-full h-auto lg:max-w-xl lg:rounded-2xl">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="more-info" class="bg-gray-50 py-16">
+    <div class="mx-auto max-w-4xl text-center">
+        <h3 class="text-2xl font-semibold text-gray-900">Más información</h3>
+        <p class="mt-4 text-lg text-gray-600">Esta aplicación te ayuda a gestionar tus tareas con herramientas intuitivas y fáciles de usar. Organiza tus prioridades y logra tus metas más rápido.</p>
+        <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div class="flex flex-col items-center">
+                <i class="fas fa-tasks text-4xl text-blue-500"></i>
+                <h4 class="mt-4 text-xl font-semibold text-gray-900">Gestión de tareas</h4>
+                <p class="mt-2 text-sm text-gray-600">Organiza y haz seguimiento de todas tus tareas desde un solo lugar.</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-calendar-check text-4xl text-blue-500"></i>
+                <h4 class="mt-4 text-xl font-semibold text-gray-900">Prioridades</h4>
+                <p class="mt-2 text-sm text-gray-600">Establece tus prioridades y trabaja en lo que más importa.</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-chart-line text-4xl text-blue-500"></i>
+                <h4 class="mt-4 text-xl font-semibold text-gray-900">Progreso</h4>
+                <p class="mt-2 text-sm text-gray-600">Mide tu progreso y sigue avanzando hacia tus metas.</p>
+            </div>
+        </div>
+
+        <!-- Sección con más funcionalidades -->
+        <div class="mt-12">
+            <h3 class="text-2xl font-semibold text-gray-900">Características adicionales</h3>
+            <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-clock text-4xl text-green-500"></i>
+                    <h4 class="mt-4 text-xl font-semibold text-gray-900">Recordatorios</h4>
+                    <p class="mt-2 text-sm text-gray-600">Establece recordatorios para que nunca olvides una tarea importante.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-users text-4xl text-pink-500"></i>
+                    <h4 class="mt-4 text-xl font-semibold text-gray-900">Colaboración</h4>
+                    <p class="mt-2 text-sm text-gray-600">Comparte tareas con tu equipo y trabaja de manera colaborativa.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-search text-4xl text-yellow-500"></i>
+                    <h4 class="mt-4 text-xl font-semibold text-gray-900">Búsqueda rápida</h4>
+                    <p class="mt-2 text-sm text-gray-600">Encuentra rápidamente cualquier tarea mediante nuestra búsqueda avanzada.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-sync text-4xl text-purple-500"></i>
+                    <h4 class="mt-4 text-xl font-semibold text-gray-900">Sincronización</h4>
+                    <p class="mt-2 text-sm text-gray-600">Sincroniza tus tareas en todos tus dispositivos para estar siempre actualizado.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-cogs text-4xl text-orange-500"></i>
+                    <h4 class="mt-4 text-xl font-semibold text-gray-900">Personalización</h4>
+                    <p class="mt-2 text-sm text-gray-600">Personaliza la interfaz y las notificaciones para adaptarlas a tus necesidades.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-shield-alt text-4xl text-red-500"></i>
+                    <h4 class="mt-4 text-xl font-semibold text-gray-900">Seguridad</h4>
+                    <p class="mt-2 text-sm text-gray-600">Tu información está segura con nuestro sistema de encriptación avanzada.</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function scrollToInfo() {
+        const infoSection = document.getElementById('more-info');
+        infoSection.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
 {% endblock %}

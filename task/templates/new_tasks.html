@@ -43,6 +43,21 @@
                         {% endif %}
                     </div>
 
+                    <!-- Campo para seleccionar el color del banner -->
+                    <div class="flex flex-col">
+                        <label for="{{ form.banner_color.id_for_label }}" class="font-semibold text-gray-700 mb-2">{{ form.banner_color.label }}</label>
+                        <div class="relative">
+                            {{ form.banner_color }}
+                        </div>
+                        {% if form.banner_color.errors %}
+                            <div class="text-red-600 text-sm mt-2">
+                                {% for error in form.banner_color.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
                     <div class="flex flex-col">
                         <label for="{{ form.tags.id_for_label }}" class="font-semibold text-gray-700 mb-2">{{ form.tags.label }}</label>
                         <div class="relative">
@@ -56,6 +71,7 @@
                             </div>
                         {% endif %}
                     </div>
+
                     <div class="flex flex-col">
                         <label for="{{ form.category.id_for_label }}" class="font-semibold text-gray-700 mb-2">{{ form.category.label }}</label>
                         <div class="relative">
@@ -127,7 +143,6 @@
                     </div>
 
                 </div>
-
                 {% if error %}
                     <div class="p-4 text-sm text-red-800 bg-red-100 border border-red-300 rounded-md">
                         {{ error }}

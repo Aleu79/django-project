@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-12">
+    <div class="container max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl font-extrabold mb-4">Editar Perfil</h1>
+        <p class="text-lg font-light">
+            Actualiza tu información personal y configura tus preferencias.
+        </p>
+    </div>
+</section>
+
+<section class="bg-gray-50 py-12">
+    <div class="container max-w-4xl mx-auto px-6">
+        <div class="bg-white shadow-md rounded-lg p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Información Personal</h2>
+            <form method="POST" action="{% url 'edit_profile' %}" class="space-y-6">
+                {% csrf_token %}
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700">Nombre de Usuario:</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        value="{{ user.username }}"
+                        required
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                    />
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value="{{ user.email }}"
+                        required
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                    />
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Contraseña (opcional):</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Nueva contraseña"
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                    />
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <a
+                        href="{% url 'perfil' %}"
+                        class="inline-block px-6 py-2 text-sm text-gray-600 bg-gray-100 rounded-lg shadow hover:bg-gray-200"
+                    >
+                        Cancelar
+                    </a>
+                    <button
+                        type="submit"
+                        class="inline-block px-6 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg shadow hover:bg-indigo-700"
+                    >
+                        Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-12">
+    <div class="container max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl font-extrabold mb-4">Configuración</h1>
+        <p class="text-lg font-light">
+            Personaliza tu experiencia en la plataforma. ¡Nuevas funcionalidades estarán disponibles pronto!
+        </p>
+    </div>
+</section>
+
+<section class="bg-gray-50 py-12">
+    <div class="container max-w-4xl mx-auto px-6">
+        <div class="bg-white shadow-md rounded-lg p-8 text-center">
+            <div class="flex flex-col items-center justify-center">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-20 h-20 text-indigo-500 mb-6"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                >
+                    <path
+                        d="M12 2a10 10 0 1 0 10 10A10.012 10.012 0 0 0 12 2zm-1 14a1 1 0 0 1-2 0v-4a1 1 0 0 1 2 0zm2-6a1 1 0 0 1-2 0V7a1 1 0 0 1 2 0zm2 6a1 1 0 0 1-2 0v-4a1 1 0 0 1 2 0z"
+                    />
+                </svg>
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">¡Próximamente!</h2>
+                <p class="text-gray-600 mb-6">
+                    Estamos trabajando en nuevas opciones para que puedas personalizar aún más tu experiencia.
+                </p>
+                <a
+                    href="/perfil"
+                    class="inline-block bg-indigo-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-indigo-600 transition duration-200"
+                >
+                    Volver a Perfil
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

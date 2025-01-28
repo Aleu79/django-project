@@ -90,14 +90,19 @@
         <div id="comments" class="mt-4" style="display: none;">
             <form method="POST" class="space-y-4">
                 {% csrf_token %}
-                {{ form.as_p }}  
-                <button type="submit" class="px-6 py-3 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition">Comentar</button>
+                <div class="space-y-2">
+                    <label for="id_comment" class="text-gray-600 font-semibold">Añadir un comentario</label>
+                    {{ form.comment }}
+                </div>
+                <button type="submit" class="px-6 py-3 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition">
+                    Comentar
+                </button>
             </form>
-
+    
             {% if error %}
             <p class="text-red-500 mt-4">{{ error }}</p>
             {% endif %}
-
+    
             <ul class="space-y-4 mt-6">
                 {% for comment in comments %}
                     <li class="text-gray-600">
@@ -111,6 +116,7 @@
             </ul>
         </div>
     </div>
+    
 </div>
 
 {% endblock %}
