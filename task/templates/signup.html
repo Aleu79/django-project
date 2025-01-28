@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-
 <div class="min-h-screen flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
         <div class="text-center">
@@ -15,28 +14,34 @@
                 <div>
                     <label for="id_username" class="sr-only">Nombre de Usuario</label>
                     <input type="text" name="username" id="id_username" 
-                           class="appearance-none  relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                           class="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                            placeholder="Ingresa tu nombre de usuario" required>
                 </div>
                 <div>
                     <label for="id_gmail" class="sr-only">Correo electrónico</label>
                     <input type="email" name="gmail" id="id_gmail" 
-                           class="appearance-none  relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                           class="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                            placeholder="Escribe tu correo electrónico" required>
                 </div>
                 <div>
                     <label for="id_password" class="sr-only">Contraseña</label>
                     <input type="password" name="password1" id="id_password" 
-                           class="appearance-none  relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                           class="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                            placeholder="Crea una contraseña segura" required>
                 </div>
                 <div>
                     <label for="id_password2" class="sr-only">Confirmar Contraseña</label>
                     <input type="password" name="password2" id="id_password2" 
-                           class="appearance-none  relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                           class="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                            placeholder="Confirma tu contraseña" required>
                 </div>
             </div>
+
+            {% if error %}
+            <div class="text-red-500 text-sm font-semibold mt-2 p-2 border border-red-300 bg-red-100 rounded-md">
+                <p>{{ error }}</p>
+            </div>
+            {% endif %}
 
             <div class="text-center">
                 <p class="mt-2 text-sm text-gray-600">
@@ -53,5 +58,4 @@
         </form>
     </div>
 </div>
-
 {% endblock %}

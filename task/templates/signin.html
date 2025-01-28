@@ -27,9 +27,9 @@
             </div>
 
             {% if error %}
-                <div class="text-center text-red-500 text-sm mt-2">
-                    <p>{{ error }}</p>
-                </div>
+            <div class="text-red-500 text-sm font-semibold mt-2 p-2 border border-red-300 bg-red-100 rounded-md">
+                <p>{{ error }}</p>
+            </div>
             {% endif %}
 
             <div class="text-center">
@@ -47,5 +47,4 @@
         </form>
     </div>
 </div>
-
 {% endblock %}
